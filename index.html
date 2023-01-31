@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+	<title>DragableNumber</title>
+	<script src="dragablenumber.js"></script>
+	<style>
+	  body {
+		  font-size: 3em;
+	  }
+	  dragable-number {
+		  border-bottom: solid 2px black;
+		  border-right: solid 2px red;
+		  padding: 0 0.5em;
+	  }
+	  dragable-number[state="minClamped"] {
+		  color: green;
+	  }
+	  dragable-number[state="inRange"] {
+		  color: blue;
+	  }
+	  dragable-number[state="maxClamped"] {
+		  color: red;
+	  }
+	</style>
+  </head>
+  <body>
+	<p>Drag these numbers ↦
+	  <dragable-number
+		id="num1"
+		max="10"
+		step="1"
+		threshold="5">2</dragable-number>
+	  +
+	  <dragable-number
+		id="num2"
+		max="10"
+		step="1"
+		threshold="5">2</dragable-number>
+	  = <span id="sum">4</span>
+	</p>
+	<script>
+	  const sum = document.getElementById("sum");
+	  const num1 = document.getElementById("num1");
+	  const num2 = document.getElementById("num2");
+	  function computeSum() {
+		  sum.innerText = num1.value + num2.value;
+	  }
+	  num1.addEventListener("changed", computeSum);
+	  num2.addEventListener("changed", computeSum);
+	</script>
+  </body>
+  
+</html>
