@@ -33,19 +33,16 @@ class DragableNumber extends HTMLElement {
         super();
     }
     connectedCallback() {
-        console.log(this.innerText);
-        const value = Number(this.innerText);
+        const value = this.hasAttribute("initial") ?
+            Number(this.getAttribute("initial")) : this.min;
         if (isNaN(value))
             throw new Error("dragable-number: Does not contain a number.");
         else if (value < this.min || value > this.max)
             throw new Error("dragable-number: Initial value outside allowable range.");
-        let state = "inRange";
-        if (value === this.min)
-            state = "minClamped";
-        else if (value === this.max)
-            state = "maxClamped";
-        console.log(value);
-        console.log(state);
+        this.innerText = value.toString();
+        const state = value === this.min ?
+            "minClamped" : value === this.max ?
+            "maxClamped" : "inRange";
         this.setAttribute("state", state);
         this.addEventListener("mousedown", this.downHandler);
         this.style.userSelect = "none";
