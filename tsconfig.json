@@ -9,6 +9,6 @@
 		"target" : "es2022",
 	},
 	"files": [
-		"dragablenumber.ts",
+		"dragable-number.ts",
 	]
 }
